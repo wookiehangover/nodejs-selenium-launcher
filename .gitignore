@@ -1,5 +1,6 @@
 /.tags
 /lib-cov/
 /lib/selenium-server-standalone-*.jar
+/lib/chromedriver*
 /node_modules/
 /npm-debug.log

@@ -1,6 +1,7 @@
 var assert = require('assert')
   , soda = require('soda')
   , seleniumLauncher = require('../lib/selenium-launcher')
+  , wd = require('wd')
 
 describe("sanity", function(){
 
@@ -26,6 +27,39 @@ describe("sanity", function(){
         selenium.kill()
       })
     })
+  });
+
+  it("should be sane with chrome and stuff", function(done){
+    seleniumLauncher({ chrome: true }, function(er, selenium) {
+      if (er) return done(er)
+      selenium.on('exit', function() { done() })
+
+      var browser = wd.promiseRemote(selenium.host, selenium.port );
+
+      browser.init({ browserName: 'chrome' }, function(err){
+        if( err ) throw new Error(err);
+
+        browser.get('http://google.com')
+          .then(function () {
+            return browser.elementByName('q');
+          })
+          .then(function (el) {
+            searchBox = el;
+            return searchBox.type('webdriver');
+          })
+          .then(function () {
+            return searchBox.getAttribute('value');
+          })
+          .then(function (val) {
+            return assert.equal(val, 'webdriver');
+          })
+          .then(function(){
+            selenium.kill();
+            done();
+          });
+      });
+
+    });
   });
 
 

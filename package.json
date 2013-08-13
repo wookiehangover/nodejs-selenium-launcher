@@ -9,15 +9,21 @@
     "type": "git",
     "url": "https://github.com/daaku/nodejs-selenium-launcher"
   },
-  "scripts": { "test": "mocha --timeout 150000 --slow 5000" },
+  "scripts": {
+    "test": "mocha --timeout 150000 --slow 5000"
+  },
   "dependencies": {
     "freeport": "1.0.x",
     "request": "2.9.x",
-    "hash_file": "0.0.x"
+    "hash_file": "0.0.x",
+    "adm-zip": "~0.4.3"
   },
   "devDependencies": {
     "mocha": "1.x.x",
-    "soda": "0.2.x"
+    "soda": "0.2.x",
+    "wd": "0.0.34"
   },
-  "engines": { "node": ">= 0.6.x" }
+  "engines": {
+    "node": ">= 0.6.x"
+  }
 }
