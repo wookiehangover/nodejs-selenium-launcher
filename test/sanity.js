@@ -34,33 +34,33 @@ describe("sanity", function(){
       if (er) return done(er)
       selenium.on('exit', function() { done() })
 
-      var browser = wd.promiseRemote(selenium.host, selenium.port );
+      var browser = wd.promiseRemote(selenium.host, selenium.port )
 
       browser.init({ browserName: 'chrome' }, function(err){
-        if( err ) throw new Error(err);
+        if( err ) throw new Error(err)
 
         browser.get('http://google.com')
           .then(function () {
-            return browser.elementByName('q');
+            return browser.elementByName('q')
           })
           .then(function (el) {
             searchBox = el;
-            return searchBox.type('webdriver');
+            return searchBox.type('webdriver')
           })
           .then(function () {
-            return searchBox.getAttribute('value');
+            return searchBox.getAttribute('value')
           })
           .then(function (val) {
-            return assert.equal(val, 'webdriver');
+            return assert.equal(val, 'webdriver')
           })
           .then(function(){
-            browser.quit();
-            selenium.kill();
-            done();
-          });
-      });
+            browser.quit()
+            selenium.kill()
+            done()
+          })
+      })
 
-    });
+    })
   });
 
 
