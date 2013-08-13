@@ -54,6 +54,7 @@ describe("sanity", function(){
             return assert.equal(val, 'webdriver');
           })
           .then(function(){
+            browser.quit();
             selenium.kill();
             done();
           });
