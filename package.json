@@ -10,7 +10,7 @@
     "url": "https://github.com/daaku/nodejs-selenium-launcher"
   },
   "scripts": {
-    "test": "mocha --timeout 150000 --slow 5000"
+    "test": "make clean && mocha --timeout 150000 --slow 5000"
   },
   "dependencies": {
     "freeport": "1.0.x",
