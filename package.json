@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "mocha": "1.x.x",
-    "soda": "0.2.x",
     "wd": "0.0.34"
   },
   "engines": {

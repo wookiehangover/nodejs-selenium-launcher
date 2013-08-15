@@ -1,7 +1,31 @@
 var assert = require('assert')
-  , soda = require('soda')
   , seleniumLauncher = require('../lib/selenium-launcher')
-  , wd = require('wd')
+  , wd = require('wd');
+
+function visitGoogle(options, browser, selenium){
+  browser.init(options, function(err){
+    if( err ) throw new Error(err)
+
+    browser.get('http://google.com')
+      .then(function () {
+        return browser.elementByName('q')
+      })
+      .then(function (el) {
+        searchBox = el;
+        return searchBox.type('webdriver')
+      })
+      .then(function () {
+        return searchBox.getAttribute('value')
+      })
+      .then(function (val) {
+        return assert.equal(val, 'webdriver')
+      })
+      .then(function(){
+        browser.quit()
+        selenium.kill()
+      })
+  })
+}
 
 describe("sanity", function(){
 
@@ -10,22 +34,8 @@ describe("sanity", function(){
       if (er) return done(er)
       selenium.on('exit', function() { done() })
 
-      soda.createClient({
-        url: 'http://www.facebook.com/',
-        host: selenium.host,
-        port: selenium.port,
-      })
-      .chain
-      .session()
-      .setTimeout(5000)
-      .open('/')
-      .waitForPageToLoad(2000)
-      .waitForTextPresent('Email')
-      .assertTextPresent('Email')
-      .testComplete()
-      .end(function() {
-        selenium.kill()
-      })
+      var browser = wd.promiseRemote(selenium.host, selenium.port )
+      visitGoogle({ browserName: 'firefox' }, browser, selenium);
     })
   });
 
@@ -35,34 +45,9 @@ describe("sanity", function(){
       selenium.on('exit', function() { done() })
 
       var browser = wd.promiseRemote(selenium.host, selenium.port )
-
-      browser.init({ browserName: 'chrome' }, function(err){
-        if( err ) throw new Error(err)
-
-        browser.get('http://google.com')
-          .then(function () {
-            return browser.elementByName('q')
-          })
-          .then(function (el) {
-            searchBox = el;
-            return searchBox.type('webdriver')
-          })
-          .then(function () {
-            return searchBox.getAttribute('value')
-          })
-          .then(function (val) {
-            return assert.equal(val, 'webdriver')
-          })
-          .then(function(){
-            browser.quit()
-            selenium.kill()
-            done()
-          })
-      })
-
+      visitGoogle({ browserName: 'chrome' }, browser, selenium);
     })
   });
-
 
   it('should get the server port from the node environment', function(done) {
     process.env.SELENIUM_LAUNCHER_PORT = '4444'
