@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "freeport": "1.0.x",
-    "request": "2.9.x",
     "hash_file": "0.0.x",
-    "adm-zip": "~0.4.3"
+    "adm-zip": "~0.4.3",
+    "request": "~2.26.0"
   },
   "devDependencies": {
     "mocha": "1.x.x",
