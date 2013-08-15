@@ -4,3 +4,5 @@
 /lib/chromedriver*
 /node_modules/
 /npm-debug.log
+tmp/chrome*
+tmp/selenium*
