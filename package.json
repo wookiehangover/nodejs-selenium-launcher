@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "mocha": "1.x.x",
-    "wd": "0.0.34"
+    "wd": "0.2.5"
   },
   "engines": {
     "node": ">= 0.6.x"
