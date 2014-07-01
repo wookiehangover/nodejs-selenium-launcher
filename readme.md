@@ -19,7 +19,7 @@ You can override the selenium server version used by the launcer
  via the environment variable
 
 ```bash
-SELENIUM_VERSION=2.32.0:c94e6d5392b687d3a141a35f5a489f50f01bef6a node app.js
+SELENIUM_VERSION=2.39.0:5a8742d5ba1c3d10339541520fead7e7f50712db node app.js
 ```
 
 You'll have to supply a valid sha for the version.
