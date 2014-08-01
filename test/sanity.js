@@ -39,7 +39,7 @@ describe("sanity", function(){
     })
   });
 
-  it("should be sane with chrome and stuff", function(done){
+  xit("should be sane with chrome and stuff", function(done){
     seleniumLauncher({ chrome: true }, function(er, selenium) {
       if (er) return done(er)
       selenium.on('exit', function() { done() })
